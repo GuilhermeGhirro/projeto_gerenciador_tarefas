@@ -1,0 +1,47 @@
+{
+  "name": "projeto_gerenciador_tarefas",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "npm run start:api",
+    "start:api": "cd apps/api && tsx src/main.ts",
+    "start:web": "cd apps/web && vite",
+    "dev": "npm run start:web",
+    "build": "tsc -b && cd apps/web && vite build",
+    "lint": "eslint .",
+    "preview": "npm run start:web",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "db:init": "docker-compose exec taskflow_db psql -U taskflow -d taskflow -f /docker-entrypoint-initdb.d/init.sql"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.1.0",
+    "@nestjs/common": "^11.1.17",
+    "@nestjs/core": "^11.1.17",
+    "@nestjs/platform-express": "^11.1.17",
+    "antd": "^6.3.3",
+    "dayjs": "^1.11.10",
+    "pg": "^8.20.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.0",
+    "@types/pg": "^8.18.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vite": "^8.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+version: "4.65.0"
+
+services:
+
+  taskflow_db:
+    image: postgres:15
+    container_name: taskflow_db_teste
+
+    environment:
+      POSTGRES_USER: taskflow
+      POSTGRES_PASSWORD: taskflow
+      POSTGRES_DB: taskflow
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - taskflow_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  taskflow_data:
