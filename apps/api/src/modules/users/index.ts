@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
-import { TasksController } from './users.controller'
-import { TasksService } from './users.service'
+import { TasksController } from '../tasks/tasks.controller';
+import { TasksService } from '../tasks/tasks.service';
 
 @Module({
   controllers: [TasksController],

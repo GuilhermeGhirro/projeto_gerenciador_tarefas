@@ -5,7 +5,7 @@ import { DatabaseService } from '../../database/database.service'
 @Injectable()
 export class TasksRepository {
 
-  constructor(private db: DatabaseService) {}
+  constructor(private db: DatabaseService) { }
 
   async findAll() {
 
@@ -17,13 +17,13 @@ export class TasksRepository {
   }
 
   async create(task: Task) {
-
-    await this.db.query(
+    const result = await this.db.query(
       `
-      INSERT INTO tasks
-      (description,hours,start_date,end_date,status_id,name,deleted)
-      VALUES ($1,$2,$3,$4,$5,$6,0)
-      `,
+    INSERT INTO tasks
+    (description,hours,start_date,end_date,status_id,name,deleted)
+    VALUES ($1,$2,$3,$4,$5,$6,0)
+    RETURNING *
+    `,
       [
         task.description,
         task.hours,
@@ -34,6 +34,7 @@ export class TasksRepository {
       ]
     )
 
+    return result.rows[0]
   }
 
 }

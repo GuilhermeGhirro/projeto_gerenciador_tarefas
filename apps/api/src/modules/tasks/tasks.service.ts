@@ -8,7 +8,10 @@ export class TasksService {
   constructor(private repository: TasksRepository) {}
 
   async findAll() {
-    return this.repository.findAll()
+
+    const data = await this.repository.findAll()
+  
+    return data ?? []
   }
 
   async create(task: Task) {

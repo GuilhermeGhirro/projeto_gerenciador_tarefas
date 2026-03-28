@@ -5,7 +5,9 @@ import { Task } from './tasks.interface'
 @Controller('tasks')
 export class TasksController {
 
-  constructor(private service: TasksService) {}
+  constructor(private service: TasksService) {
+    console.log('SERVICE:', service)
+  }
 
   @Get()
   async findAll() {
