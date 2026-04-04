@@ -1,21 +1,34 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, InternalServerErrorException } from '@nestjs/common'
 import { TasksRepository } from './tasks.repository'
 import { Task } from './tasks.interface'
 
 @Injectable()
 export class TasksService {
 
-  constructor(private repository: TasksRepository) {}
+  constructor(private repository: TasksRepository) { }
 
   async findAll() {
-
-    const data = await this.repository.findAll()
-  
-    return data ?? []
+    try {
+      const data = await this.repository.findAll()
+      if(data.length === 0) {
+        return []
+      }
+      return data
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao buscar tasks', {
+        cause: error,
+      })
+    }
   }
 
   async create(task: Task) {
-    return this.repository.create(task)
+    try {
+      return await this.repository.create(task)
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao buscar tasks', {
+        cause: error,
+      })
+    }
   }
 
 }

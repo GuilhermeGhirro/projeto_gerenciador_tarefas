@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# 📝 Projeto Gerenciador de Tarefas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema fullstack para gerenciamento de tarefas, desenvolvido para estudo e prática com NestJS e React.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Tecnologias
 
-## React Compiler
+### Backend
+- NestJS
+- PostgreSQL
+- Docker
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React
+- Vite
+- TypeScript
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Funcionalidades
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Criar tarefas
+- Listar tarefas
+- Atualizar tarefas
+- Deletar tarefas (soft delete)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚙️ Como rodar o projeto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 1. Instalar dependências
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+### 2. Subir banco com Docker
+
+docker-compose up -d
+
+---
+
+### 3. Iniciar backend
+
+npm run start:api
+
+---
+
+### 4. Iniciar frontend
+
+npm run start:web
+
+---
+
+## 🗄️ Banco de dados
+
+- PostgreSQL rodando via Docker
+- Script inicial disponível em:
+  - `/docker-entrypoint-initdb.d/init.sql`
+
+---
+
+## 📌 Observações
+
+Este projeto foi desenvolvido com foco em aprendizado de arquitetura backend utilizando NestJS, incluindo separação em camadas:
+
+- Controller
+- Service
+- Repository
+
+---
+
+## 🧠 Aprendizados
+
+- Uso de NestJS com arquitetura em camadas
+- Integração com PostgreSQL via Docker
+- Organização de monorepo
+
+## 👨‍💻 Autor
+
+Desenvolvido por Guilherme Ghirro
