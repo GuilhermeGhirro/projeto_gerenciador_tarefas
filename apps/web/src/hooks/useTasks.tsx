@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { message } from 'antd'
-import { getTasks, createTask } from '../services/api'
+import { getTasks, createTask, deleteTask } from '../services/api'
 
 export interface Task {
   id?: number
@@ -56,6 +56,16 @@ export function useTasks() {
     }
   }
 
+  const remove = async (id: number) => {
+    try {
+      await deleteTask(id)
+      await loadTasks()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erro ao deletar tarefa')
+      throw err
+    }
+  }
+
   return {
     tasks: tasks.map(t => ({
       ...t,
@@ -64,6 +74,7 @@ export function useTasks() {
     loading,
     error,
     add,
+    remove,
     refresh: loadTasks
   }
 }

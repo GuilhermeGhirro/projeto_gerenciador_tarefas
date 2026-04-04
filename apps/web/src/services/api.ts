@@ -23,6 +23,15 @@ export async function createTask(task: {
   return response.json()
 }
 
+export async function deleteTask(id: number) {
+  const response = await fetch(`${API_URL}/tasks/${id}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  if (!response.ok) throw new Error('Erro ao deletar tarefa')
+  return response.json()
+}
+
 export async function getUsers() {
   const response = await fetch(`${API_URL}/users`)
   if (!response.ok) throw new Error('Erro ao carregar usuários')

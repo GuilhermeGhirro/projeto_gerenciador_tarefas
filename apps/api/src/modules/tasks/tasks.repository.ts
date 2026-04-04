@@ -37,4 +37,13 @@ export class TasksRepository {
     return result.rows[0]
   }
 
+  async delete(id: number) {
+    const result = await this.db.query(
+      `UPDATE tasks SET deleted = 1 WHERE id = $1 RETURNING *`,
+      [id]
+    )
+
+    return result.rows[0]
+  }
+
 }

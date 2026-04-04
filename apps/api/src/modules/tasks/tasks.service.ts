@@ -31,4 +31,14 @@ export class TasksService {
     }
   }
 
+  async delete(id: number) {
+    try {
+      return await this.repository.delete(id)
+    } catch (error) {
+      throw new InternalServerErrorException('Erro ao deletar tarefa', {
+        cause: error,
+      })
+    }
+  }
+
 }

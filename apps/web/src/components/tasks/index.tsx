@@ -5,7 +5,7 @@ import { useTasks, type Task } from '../../hooks/useTasks'
 import dayjs from 'dayjs'
 
 export default function TaskManagement() {
-  const { tasks, loading, error, add } = useTasks()
+  const { tasks, loading, error, add, remove } = useTasks()
   const [form] = Form.useForm()
   const [showForm, setShowForm] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -27,6 +27,23 @@ export default function TaskManagement() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleDeleteTask = async (taskId: number) => {
+    Modal.confirm({
+      title: 'Confirmar exclusão',
+      content: 'Tem certeza que deseja excluir esta tarefa?',
+      okText: 'Sim',
+      cancelText: 'Não',
+      onOk: async () => {
+        try {
+          await remove(taskId)
+          message.success('Tarefa deletada com sucesso!')
+        } catch {
+          message.error('Erro ao deletar tarefa')
+        }
+      }
+    })
   }
 
   if (error) {
@@ -150,7 +167,12 @@ export default function TaskManagement() {
                       <Button type="primary" icon={<PlayCircleOutlined />} size="small" />
                       <Button icon={<PauseCircleOutlined />} size="small" />
                       <Button icon={<EditOutlined />} size="small" />
-                      <Button icon={<DeleteOutlined />} size="small" />
+                      <Button 
+                        danger
+                        icon={<DeleteOutlined />} 
+                        size="small" 
+                        onClick={() => handleDeleteTask(task.id!)}
+                      />
                       <Tag
                         color={
                           task.statusId === 1
